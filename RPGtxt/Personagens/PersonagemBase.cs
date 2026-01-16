@@ -20,5 +20,30 @@ public abstract class PersonagemBase{
        Defesa = defesa; 
     }
 
+
+    public void ReceberDano(int danoRecebido)
+    {
+        int danoFinal = danoRecebido - Defesa;
+
+        if(danoFinal < 0)
+        {
+            danoFinal = 0;
+        }
+
+        VidaAtual -= danoFinal;
+
+        if(VidaAtual < 0)
+        {
+            VidaAtual = 0;
+        }
+
+        Console.WriteLine($"{Nome} Recebeu {danoFinal} de dano! \n Vida restante: {VidaAtual}");
+    }
+
+    public virtual int CalcularDano()
+    {
+        return _random.Next(AtkMin, AtkMax + 1);
+    }
+
 }
 
