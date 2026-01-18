@@ -15,6 +15,7 @@ public abstract class PersonagemBase{
     {
        Nome = nome;
        VidaMaxima = vida;
+       VidaAtual = vida;
        AtkMin = atkMin;
        AtkMax = atkMax;
        Defesa = defesa; 
