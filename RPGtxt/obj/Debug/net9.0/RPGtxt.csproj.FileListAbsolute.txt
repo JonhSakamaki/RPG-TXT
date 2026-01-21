@@ -1,0 +1,5 @@
+D:\Jonh Arquivos\Meus Projetos\RPG TXT\RPGtxt\obj\Debug\net9.0\RPGtxt.GeneratedMSBuildEditorConfig.editorconfig
+D:\Jonh Arquivos\Meus Projetos\RPG TXT\RPGtxt\obj\Debug\net9.0\RPGtxt.AssemblyInfoInputs.cache
+D:\Jonh Arquivos\Meus Projetos\RPG TXT\RPGtxt\obj\Debug\net9.0\RPGtxt.AssemblyInfo.cs
+D:\Jonh Arquivos\Meus Projetos\RPG TXT\RPGtxt\obj\Debug\net9.0\RPGtxt.csproj.CoreCompileInputs.cache
+D:\Jonh Arquivos\Meus Projetos\RPG TXT\RPGtxt\obj\Debug\net9.0\RPGtxt.sourcelink.json

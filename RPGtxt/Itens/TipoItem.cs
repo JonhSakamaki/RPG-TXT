@@ -8,5 +8,6 @@ public enum TipoItem
     Peitoral,
     Luva,
     Pernas,
+    Consumivel,
 
 }
