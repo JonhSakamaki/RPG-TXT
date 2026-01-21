@@ -1,3 +1,5 @@
+using RPGtxt.Itens;
+
 namespace RPGtxt.Personagens;
 
 public class Jogador : PersonagemBase
@@ -7,10 +9,22 @@ public class Jogador : PersonagemBase
         Nivel = 1;
         ExpAtual = 0;
         ExpNecessaria = 100;
+        Ouro = 100;
     }
     public int Nivel {get; private set;}
     public int ExpAtual{get; private set;}
     public int ExpNecessaria{get; private set;}
+
+    public List<Item> Inventario {get; private set;} = new List<Item>();
+
+    public Arma? ArmaEquipada {get; private set;}
+    public Armadura? Capacete {get; private set;}
+    public Armadura? Peitoral {get; private set;}
+    public Armadura? Luva {get; private set;}
+    public Armadura? Pernas {get; private set;}
+
+    public int Ouro {get; private set;}
+
 
     public void GanharExp(int quantidade)
     {
@@ -21,6 +35,23 @@ public class Jogador : PersonagemBase
         {
             SubirDeNivel();
         }
+    }
+
+    public void AddInventario(Item itemRecebido)
+    {
+        if(itemRecebido.Tipo == TipoItem.Consumivel)
+        {
+            Item? itemExistente = Inventario.Find(i => i.Nome == itemRecebido.Nome);
+
+            if(itemExistente != null)
+            {
+                itemExistente.Quantidade += 1;
+                Console.WriteLine($"Voce ja tinha {itemRecebido.Nome}. Agora tem {itemExistente.Quantidade}!");
+                return;
+            }
+        }
+        Inventario.Add(itemRecebido);
+        Console.WriteLine($"{itemRecebido.Nome} adicionado ao inventario!");
     }
 
     private void SubirDeNivel()
@@ -42,7 +73,5 @@ public class Jogador : PersonagemBase
         Console.WriteLine($"Status aumentados! \n Vida: {VidaMaxima} \n Ataque: {AtkMin}~{AtkMax} \n Defesa: {Defesa}");
     }
 
+    
 }
-
-  
-

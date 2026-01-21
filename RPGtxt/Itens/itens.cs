@@ -16,6 +16,8 @@ public abstract class Item
         Tipo = tipo;
     }
 
+    public int Quantidade{get; set;} = 1;
+
     public virtual void ExibirDescricao()
     {
         Console.Write($"[{Tipo}]{Nome.PadRight(20)} | ");
