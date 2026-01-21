@@ -7,15 +7,18 @@ public abstract class Item
 
     public int PrecoVenda => PrecoCompra/2;
 
-    public Item(string nome, int precoCompra)
+    public TipoItem Tipo {get; private set;}
+
+    public Item(string nome, int precoCompra, TipoItem tipo)
     {
         Nome = nome;
         PrecoCompra = precoCompra;
+        Tipo = tipo;
     }
 
     public virtual void ExibirDescricao()
     {
-        Console.Write($"{Nome.PadRight(20)} | ");
+        Console.Write($"[{Tipo}]{Nome.PadRight(20)} | ");
     }
 
 }
