@@ -4,17 +4,19 @@ namespace RPGtxt.Itens;
 
 public class Arma : Item
 {
-    public int DanoExtra{get; private set; }
+    public int DanoMIn{get; private set; }
+    public int DanoMax{get; private set;}
 
-    public Arma(string nome, int precoCompra, int danoExtra) : base(nome, precoCompra)
+    public Arma(string nome, int precoCompra, int danoMin, int danoMax) : base(nome, precoCompra, TipoItem.Arma)
     {
-        DanoExtra = danoExtra;
+        DanoMIn = danoMin;
+        DanoMax = danoMax;
     }
 
     public override void ExibirDescricao()
     {
         base.ExibirDescricao();
-        Console.WriteLine($"Atributo: +{DanoExtra} ATK | Compra: {PrecoCompra}G | Venda: {PrecoVenda}G ");
+        Console.WriteLine($"Atributo: {DanoMIn}~{DanoMax} ATK | Compra: {PrecoCompra}G | Venda: {PrecoVenda}G ");
 
     }
 }
