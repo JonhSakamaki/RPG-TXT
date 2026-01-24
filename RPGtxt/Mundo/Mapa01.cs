@@ -1,1 +1,0 @@
-namespace RPGtxt.Mapa1;
