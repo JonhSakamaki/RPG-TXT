@@ -59,6 +59,7 @@ public class Coliseu
             Console.WriteLine($"\n VITORIA! {inimigo.Nome} foi derrotado.");
             jogador.GanharExp(inimigo.XpRecompensa);
            
+           
             int ouroGanho = inimigo.DropOuro();
 
             Console.WriteLine($"Recompensa da partida: {ouroGanho}G recebidos!");
