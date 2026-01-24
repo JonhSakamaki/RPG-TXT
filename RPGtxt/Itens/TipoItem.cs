@@ -4,7 +4,7 @@ public enum TipoItem
 {
     Arma,
     Escudo,
-    Cabeca,
+    Capacete,
     Peitoral,
     Luva,
     Pernas,

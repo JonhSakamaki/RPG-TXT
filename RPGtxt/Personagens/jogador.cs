@@ -22,6 +22,7 @@ public class Jogador : PersonagemBase
     public Armadura? Peitoral {get; private set;}
     public Armadura? Luva {get; private set;}
     public Armadura? Pernas {get; private set;}
+    public Armadura? Escudo {get; private set;}
 
     public int Ouro {get; private set;}
 
@@ -73,5 +74,55 @@ public class Jogador : PersonagemBase
         Console.WriteLine($"Status aumentados! \n Vida: {VidaMaxima} \n Ataque: {AtkMin}~{AtkMax} \n Defesa: {Defesa}");
     }
 
-    
+    public override int CalcularDano()
+    {
+        int minFInal = AtkMin;
+        int maxFinal = AtkMax;
+
+        if (ArmaEquipada != null)
+        {
+            minFInal += ArmaEquipada.DanoMIn;
+            maxFinal += ArmaEquipada.DanoMax;
+        }
+        return _random.Next(minFInal, maxFinal + 1);
+    }
+
+    public int DefesaTotal
+    {
+        get
+        {
+            int total = Defesa;
+            if (Capacete != null) total += Capacete.DefesaExtra;
+            if(Peitoral != null) total += Peitoral.DefesaExtra;
+            if(Pernas != null) total += Pernas.DefesaExtra;
+            if(Luva != null) total += Luva.DefesaExtra;
+            if(Escudo != null) total += Escudo.DefesaExtra;
+            return total;
+        }
+    }
+
+public int VidaMaxItens
+    {
+        get
+        {
+            double bTotal = 0;
+            if(Capacete != null) bTotal += Capacete.VidaPercentual;
+            if(Peitoral != null) bTotal += Peitoral.VidaPercentual;
+            if(Pernas != null) bTotal += Pernas.VidaPercentual;
+            if(Luva != null) bTotal += Luva.VidaPercentual;
+            return(int)(VidaMaxima * (1 + bTotal));
+        }
+    }
+
+    public override void ReceberDano(int danoInimigo)
+    {
+        int danoFinal = danoInimigo - DefesaTotal;
+
+        if(danoFinal <0) danoFinal = 0;
+
+        VidaAtual -= danoFinal;
+
+        Console.WriteLine($"{Nome} absorveu o impacto! Dano Recebido: {danoFinal}.");
+    }
+
 }

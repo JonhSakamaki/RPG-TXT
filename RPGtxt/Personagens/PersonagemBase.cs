@@ -21,8 +21,7 @@ public abstract class PersonagemBase{
        Defesa = defesa; 
     }
 
-
-    public void ReceberDano(int danoRecebido)
+    public virtual void ReceberDano(int danoRecebido)
     {
         int danoFinal = danoRecebido - Defesa;
 
