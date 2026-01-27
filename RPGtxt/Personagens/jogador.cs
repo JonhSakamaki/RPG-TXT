@@ -55,6 +55,24 @@ public class Jogador : PersonagemBase
         Console.WriteLine($"{itemRecebido.Nome} adicionado ao inventario!");
     }
 
+    public void ExibirInventario()
+    {
+        Console.WriteLine("\n--- SEU INVENTARIO ---");
+
+        if (Inventario.Count == 0)
+        {
+            Console.WriteLine("Sua mochila esta vazia.");
+        }
+
+        for (int i = 0; i < Inventario.Count; i++)
+        {
+            Console.Write($"{i + 1}.");
+
+            Inventario[i].ExibirDescricao();
+        }
+        Console.WriteLine("----------------------");
+    }
+
     private void SubirDeNivel()
     {
         ExpAtual -= ExpNecessaria;
@@ -123,6 +141,17 @@ public int VidaMaxItens
         VidaAtual -= danoFinal;
 
         Console.WriteLine($"{Nome} absorveu o impacto! Dano Recebido: {danoFinal}.");
+    }
+
+    public void Pagar(int valor)
+    {
+        Ouro -= valor;
+    }
+
+    public void GanharOuro(int quantidade)
+    {
+        Ouro += quantidade;
+        Console.WriteLine($"[MOEDA] +{quantidade}G! Saldo atual: {Ouro}");
     }
 
 }

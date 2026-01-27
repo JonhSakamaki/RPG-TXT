@@ -4,7 +4,7 @@ public class Pocao : Item
 {
     public int PoderCura{get; private set;}
 
-    public Pocao(string nome, int preco, int poderCura) : base(nome, preco, TipoItem.Consumivel)
+    public Pocao(string nome, int preco, int poderCura, TipoItem tipo) : base(nome, preco, TipoItem.Consumivel)
     {
         PoderCura = poderCura;
     }
