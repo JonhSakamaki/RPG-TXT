@@ -154,4 +154,29 @@ public int VidaMaxItens
         Console.WriteLine($"[MOEDA] +{quantidade}G! Saldo atual: {Ouro}");
     }
 
+    public void EquiparItem(int indice)
+    {
+        if (indice < 0 || indice >= Inventario.Count) return;
+
+        Item item = Inventario[indice];
+
+        if (item is Arma arma)
+        {
+            ArmaEquipada = arma;
+            Console.WriteLine($"⚔️ Você equipou: {arma.Nome}!");
+        }
+        else if (item is Armadura armadura)
+        {
+            switch (armadura.Tipo)
+            {
+                case TipoItem.Capacete: Capacete = armadura; break;
+                case TipoItem.Peitoral: Peitoral = armadura; break;
+                case TipoItem.Luva: Luva = armadura; break;
+                case TipoItem.Pernas: Pernas = armadura; break;
+            }
+            Console.WriteLine($"🛡️ Você equipou: {armadura.Nome}");
+        }
+        Thread.Sleep(1500);
+    }
+
 }

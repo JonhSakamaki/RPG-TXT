@@ -39,30 +39,88 @@ public class Coliseu
     }
 
     public void RealizarDuelo(Jogador jogador, Inimigo inimigo)
-    {
-        Console.WriteLine($"\n *** INICIANDO COMBATE: {inimigo.Nome} ***");
-
-        while (jogador.VidaAtual > 0  && inimigo.VidaAtual > 0)
+    {   
+        while(jogador.VidaAtual > 0 && inimigo.VidaAtual > 0)
         {
-            int danoPlayer = jogador.CalcularDano();
-            inimigo.ReceberDano(danoPlayer);
+         Console.Clear();
+         Console.WriteLine("========================================");
+         Console.WriteLine($"   COMBATE: {jogador.Nome} vs {inimigo.Nome}");
+         Console.WriteLine("========================================");
+         Console.WriteLine($"{jogador.Nome} HP: {jogador.VidaAtual}/{jogador.VidaMaxima}");
+         Console.WriteLine($"{inimigo.Nome} HP: {inimigo.VidaAtual}/{inimigo.VidaMaxima}");
+         Console.WriteLine("========================================");   
 
-            if(inimigo.VidaAtual <= 0) break;
+        Console.WriteLine("\nSua Vez! O que deseja fazer? ");
+        Console.WriteLine("1. Atacar com sua arma");
+        Console.Write("Escolha: ");
 
+        string acao = Console.ReadLine() ?? "";
+
+        if (acao == "1")
+            {
+                Console.WriteLine($"\n> Voce avanca para atacar!");
+                int danoPlayer = jogador.CalcularDano();
+                inimigo.ReceberDano(danoPlayer);
+
+                if (inimigo.VidaAtual <= 0) break;
+
+                Console.WriteLine($"\n> {inimigo.Nome} contra-ataca!");
             int danoInimigo = inimigo.CalcularDano();
             jogador.ReceberDano(danoInimigo);
 
-            Thread.Sleep(600);
+            Console.WriteLine("\nPressione qualquer tecla para o proxino turno...");
+            Console.ReadKey();
+            }
+        else
+        {
+            Console.WriteLine("\nOpcao invalida! voce hesitou e perdeu sua chance.");
+            Thread.Sleep(1000);
+
+            int danoInimigo = inimigo.CalcularDano();
+            jogador.ReceberDano(danoInimigo);
+            Console.ReadKey();
         }
+            
+        }
+        
+       
         if (jogador.VidaAtual > 0)
         {
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($"\n VITORIA! {inimigo.Nome} foi derrotado.");
-            jogador.GanharExp(inimigo.XpRecompensa);
-           
+            Console.ResetColor();
+
+            jogador.GanharExp(inimigo.XpRecompensa);         
            
             int ouroGanho = inimigo.DropOuro();
-
+            jogador.GanharOuro(ouroGanho);
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine($"Recompensa da partida: {ouroGanho}G recebidos!");
+            Console.ResetColor();
+
+            Console.WriteLine("\nPressione qualquer tecla para continuar...");
+            Console.ReadKey();
+        }
+        else
+        {
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.WriteLine($"\n DERROTA... {jogador.Nome} caiu diante de {inimigo.Nome}.");
+            Console.WriteLine("A plateia silencia enquanto seu corpo e retirado da arena...");
+            Console.ResetColor();
+            Console.ReadKey();
+        }
+    }
+
+    public void IniciarBatalha(Jogador jogador)
+    {
+        Inimigo inimigoDaVez = GerarInimigoParaOnda();
+        RealizarDuelo(jogador, inimigoDaVez);
+
+        if (jogador.VidaAtual > 0)
+        {
+            IncrementarOnda();
+            Console.WriteLine($"\nPrepare-se! A proxima onda sera a de numero {OndaAtual}.");
+            Console.ReadKey();
         }
     }
 }

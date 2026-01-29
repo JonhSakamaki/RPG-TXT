@@ -3,3 +3,13 @@ D:\Jonh Arquivos\Meus Projetos\RPG TXT\RPGtxt\obj\Debug\net9.0\RPGtxt.AssemblyIn
 D:\Jonh Arquivos\Meus Projetos\RPG TXT\RPGtxt\obj\Debug\net9.0\RPGtxt.AssemblyInfo.cs
 D:\Jonh Arquivos\Meus Projetos\RPG TXT\RPGtxt\obj\Debug\net9.0\RPGtxt.csproj.CoreCompileInputs.cache
 D:\Jonh Arquivos\Meus Projetos\RPG TXT\RPGtxt\obj\Debug\net9.0\RPGtxt.sourcelink.json
+D:\Jonh Arquivos\Meus Projetos\RPG TXT\RPGtxt\bin\Debug\net9.0\RPGtxt.exe
+D:\Jonh Arquivos\Meus Projetos\RPG TXT\RPGtxt\bin\Debug\net9.0\RPGtxt.deps.json
+D:\Jonh Arquivos\Meus Projetos\RPG TXT\RPGtxt\bin\Debug\net9.0\RPGtxt.runtimeconfig.json
+D:\Jonh Arquivos\Meus Projetos\RPG TXT\RPGtxt\bin\Debug\net9.0\RPGtxt.dll
+D:\Jonh Arquivos\Meus Projetos\RPG TXT\RPGtxt\bin\Debug\net9.0\RPGtxt.pdb
+D:\Jonh Arquivos\Meus Projetos\RPG TXT\RPGtxt\obj\Debug\net9.0\RPGtxt.dll
+D:\Jonh Arquivos\Meus Projetos\RPG TXT\RPGtxt\obj\Debug\net9.0\refint\RPGtxt.dll
+D:\Jonh Arquivos\Meus Projetos\RPG TXT\RPGtxt\obj\Debug\net9.0\RPGtxt.pdb
+D:\Jonh Arquivos\Meus Projetos\RPG TXT\RPGtxt\obj\Debug\net9.0\RPGtxt.genruntimeconfig.cache
+D:\Jonh Arquivos\Meus Projetos\RPG TXT\RPGtxt\obj\Debug\net9.0\ref\RPGtxt.dll

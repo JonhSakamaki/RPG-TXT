@@ -57,14 +57,21 @@ public class Loja
 
         if(jogador.Ouro >= itemDesejado.PrecoCompra)
         {
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($"\n [LOJA] Voce Comprou: {itemDesejado.Nome} por {itemDesejado.PrecoCompra}G.");
+            Console.ResetColor();
             jogador.Pagar(itemDesejado.PrecoCompra);
             jogador.AddInventario(itemDesejado);
+            
         }
         else
         {
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine($"\n[Loja] Ouro insuficiente! Volte para o Coliseu e lute!");
+            Console.ResetColor();
         }
+        Console.WriteLine("Pressione uma tecla para continuar...");
+        Console.ReadKey();
 
     }
 
@@ -75,12 +82,14 @@ public class Loja
             Console.WriteLine("Voce nao tem este item no seu inventario!");
             return;
         }
-
         Item itemParaVender = jogador.Inventario[indiceNoInventario];
 
         int valorVenda = itemParaVender.PrecoCompra / 2;
 
         jogador.GanharOuro(valorVenda);
+
+        jogador.Inventario.RemoveAt(indiceNoInventario);
+
         Console.WriteLine($"\n[LOJA] Voce vendeu {itemParaVender.Nome} por {valorVenda}G");
     }
 
@@ -93,7 +102,7 @@ public class Loja
             Console.Clear();
             Console.WriteLine($"-_-_-_-_- LOJA DE EQUIPAMENTOS -_-_-_-_-");
             Console.WriteLine($"Seu Ouro: {jogador.Ouro}G");
-            Console.WriteLine("1. Ver Itens para Comorar");
+            Console.WriteLine("1. Ver Itens para Comprar");
             Console.WriteLine("2. Vender Meus Itens (50% do valor)");
             Console.WriteLine("0. Sair da Loja");
             Console.Write("Escolha uma opcao: ");
