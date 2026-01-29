@@ -60,7 +60,7 @@ while (jogoRun)
                 Console.WriteLine("#                                      #");
                 Console.WriteLine("########################################");
                 Console.WriteLine("\nPressione qualquer tecla para fechar o jogo.");
-
+                Console.ReadKey();
                 jogoRun = false;
             }
              break;
@@ -70,19 +70,34 @@ while (jogoRun)
             mercante.Interagir(meuJogador);
             break;
         case "3":
-            Console.Clear();
-            meuJogador.ExibirInventario();
-            Console.WriteLine("\n--- STATUS ATUAIS ---");
-            Console.WriteLine($"Ataque: {meuJogador.AtkMin}~{meuJogador.AtkMax} | Defesa Total: {meuJogador.DefesaTotal}");
-            Console.WriteLine("\n[Dica: Digite o numero do item para EQUIPAR ou '0' para voltar]");
-            Console.Write("Escolha: ");
+            bool noInventario = true;
+            while (noInventario)
+            {
+                Console.Clear();
+                meuJogador.ExibirInventario();
+                Console.WriteLine("\n--- STATUS ATUAIS ---");
+                Console.WriteLine($"Ataque: {meuJogador.AtkMin}~{meuJogador.AtkMax} | Defesa Total: {meuJogador.DefesaTotal}");
+                 Console.WriteLine("\n[Dica: Digite o numero do item para EQUIPAR ou '0' para voltar]");
+                Console.Write("Escolha: ");
 
-            if (int.TryParse(Console.ReadLine(), out int indeceEquipar) && indeceEquipar != 0)
+                string ent = Console.ReadLine() ?? "";
+
+                if (ent == "0")
             {
                 
-
-                meuJogador.EquiparItem(indeceEquipar - 1);
-            }          
+                noInventario = false;
+                
+            }
+            else if (int.TryParse(ent, out int indiceEquipar))
+                {
+                    meuJogador.EquiparItem(indiceEquipar - 1);
+                }
+                else
+                {
+                    Console.WriteLine("Opcao invalida!");
+                    Thread.Sleep(800);
+                }               
+            }                    
             break;
         case "0":
             jogoRun = false;
@@ -93,7 +108,4 @@ while (jogoRun)
             Thread.Sleep(1500);
             break;
     }
-
-
-
 }
