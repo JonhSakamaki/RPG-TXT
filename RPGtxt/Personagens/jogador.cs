@@ -57,7 +57,7 @@ public class Jogador : PersonagemBase
 
     public void ExibirInventario()
     {
-        Console.WriteLine("\n--- SEU INVENTARIO ---");
+        Console.WriteLine("\n======= SEU INVENTARIO =======");
 
         if (Inventario.Count == 0)
         {
@@ -66,9 +66,13 @@ public class Jogador : PersonagemBase
 
         for (int i = 0; i < Inventario.Count; i++)
         {
+            if(Inventario[i] is Arma) Console.ForegroundColor = ConsoleColor.DarkCyan;
+            else if (Inventario[i] is Armadura) Console.ForegroundColor = ConsoleColor.Magenta;
+            else Console.ForegroundColor = ConsoleColor.Yellow;
+            
             Console.Write($"{i + 1}.");
-
             Inventario[i].ExibirDescricao();
+            Console.ResetColor();
         }
         Console.WriteLine("----------------------");
     }

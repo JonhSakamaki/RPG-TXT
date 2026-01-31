@@ -3,38 +3,69 @@ using RPGtxt.Personagens;
 using RPGtxt.Logica;
 using RPGtxt.Itens;
 
-Console.WriteLine("Digite seu nome Bravo Gladiador: ");
-Jogador meuJogador = new Jogador(Console.ReadLine()!);
+Console.Clear();
+Console.ForegroundColor = ConsoleColor.Yellow;
+Console.WriteLine(@"
+  ██████╗ ██╗███████╗███████╗     ██████╗ ███████╗
+  ██╔══██╗██║██╔════╝██╔════╝    ██╔═══██╗██╔════╝
+  ██████╔╝██║███████╗█████╗      ██║   ██║█████╗  
+  ██╔══██╗██║╚════██║██╔══╝      ██║   ██║██╔══╝  
+  ██║  ██║██║███████║███████╗    ╚██████╔╝██║     
+  ╚═╝  ╚═╝╚═╝╚══════╝╚══════╝     ╚═════╝ ╚═╝     
+                                                  
+  ████████╗██╗  ██╗███████╗    ██╗    ██╗ █████╗ ██████╗ ██████╗ ██╗ ██████╗ ██████╗ 
+  ╚══██╔══╝██║  ██║██╔════╝    ██║    ██║██╔══██╗██╔══██╗██╔══██╗██║██╔═══██╗██╔══██╗
+     ██║   ███████║█████╗      ██║ █╗ ██║███████║██████╔╝██████╔╝██║██║   ██║██████╔╝
+     ██║   ██╔══██║██╔══╝      ██║███╗██║██╔══██╗██╔══██╗██╔══██╗██║██║   ██║██╔══██╗
+     ██║   ██║  ██║███████╗    ╚███╔███╔╝██║  ██║██║  ██║██║  ██║██║╚██████╔╝██║  ██║
+     ╚═╝   ╚═╝  ╚═╝╚══════╝     ╚══╝╚══╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝ ╚═════╝ ╚═╝  ╚═╝
+");
+
+Console.ForegroundColor = ConsoleColor.DarkGray;
+Console.WriteLine("          ~ O destino de um herói começa aqui ~          ");
+Console.WriteLine("---------------------------------------------------------");
+Console.ResetColor();
+
+Console.Write("\nDigite seu nome, Bravo Guerreiro: ");
+string nomeEntrada = Console.ReadLine()!;
+if (string.IsNullOrWhiteSpace(nomeEntrada)) nomeEntrada = "Estrangeiro";
+
+Jogador meuJogador = new Jogador(nomeEntrada);
 
 Coliseu arena = new Coliseu();
 Loja mercante = new Loja();
 
-Console.WriteLine("=== O DESPETAR DO GLADIADOR ===");
-Console.WriteLine($"Bem-Vindo, {meuJogador.Nome}!");
+Console.WriteLine($"\nPrepare-se, {meuJogador.Nome}. A arena te espera!");
+Console.WriteLine("Pressione qualquer tecla para começar...");
+Console.ReadKey();
 
 bool jogoRun = true;
 
 while (jogoRun)
 {
     Console.Clear();
-    Console.WriteLine("======================================");
-    Console.Write("    SITUAÇÃO ATUAL DE  ");
+    Console.ForegroundColor = ConsoleColor.Yellow;
+    Console.WriteLine("╔══════════════════════════════════════════════╗");
+    Console.Write("║  STATUS: "); 
+    Console.ForegroundColor = ConsoleColor.Cyan; Console.Write(meuJogador.Nome.ToUpper().PadRight(12)); 
+    Console.ForegroundColor = ConsoleColor.Yellow; Console.WriteLine("                        ║");
+
+    Console.Write("║  HP: "); 
+    Console.ForegroundColor = ConsoleColor.Red; Console.Write($"{meuJogador.VidaAtual}/{meuJogador.VidaMaxima}".PadRight(10));
+    Console.ForegroundColor = ConsoleColor.Yellow; Console.Write(" | OURO: ");
+    Console.ForegroundColor = ConsoleColor.Yellow; Console.Write($"{meuJogador.Ouro}G".PadRight(10));
+    Console.ForegroundColor = ConsoleColor.Yellow; Console.WriteLine("            ║");
+
+    Console.Write("║  ARMA: ");
     Console.ForegroundColor = ConsoleColor.Cyan; 
-    Console.WriteLine(meuJogador.Nome.ToUpper());
+    string armaNome = meuJogador.ArmaEquipada?.Nome ?? "Punhos Nuus";
+    Console.Write(armaNome.PadRight(30));
+    Console.ForegroundColor = ConsoleColor.Yellow; Console.WriteLine("        ║");
+
+    Console.WriteLine("╚══════════════════════════════════════════════╝");
     Console.ResetColor();
 
-    Console.Write("    Vida: ");
-    Console.ForegroundColor = ConsoleColor.Red; 
-    Console.Write($"{meuJogador.VidaAtual}/{meuJogador.VidaMaxima}");
-    Console.ResetColor();
-
-    Console.Write(" | Ouro: ");
-    Console.ForegroundColor = ConsoleColor.Yellow; 
-    Console.Write($"{meuJogador.Ouro}G\n");
-    Console.ResetColor();
-    Console.WriteLine("======================================");
-    
-    Console.WriteLine("\nO QUE VOCE DESEJA FAZER AGORA?");
+    Console.WriteLine("\nO QUE VOCÊ DESEJA FAZER AGORA?");
     Console.WriteLine("1. Entrar no Coliseu (Batalhar)");
     Console.WriteLine("2. Visitar a Loja (Mercado)");
     Console.WriteLine("3. Ver Inventario (Equipar/Olhar)");
@@ -47,26 +78,33 @@ while (jogoRun)
     switch (entrada)
     {
         case "1":
+            Console.ForegroundColor = ConsoleColor.DarkGray;
             Console.WriteLine("\nVoce caminha em direcao ao barulho da multidao na arena...");
+            Console.ResetColor();
             Console.ReadKey();
-            arena.IniciarBatalha(meuJogador);           
+            arena.IniciarBatalha(meuJogador);  
+
             if (meuJogador.VidaAtual <= 0)
             {
                 Console.Clear();
+                Console.ForegroundColor = ConsoleColor.DarkRed;
                 Console.WriteLine("########################################");
                 Console.WriteLine("#                                      #");
                 Console.WriteLine("#           VOCÊ FOI DERROTADO!        #");
                 Console.WriteLine("#      Sua lenda termina aqui...       #");
                 Console.WriteLine("#                                      #");
                 Console.WriteLine("########################################");
+                Console.ResetColor();
                 Console.WriteLine("\nPressione qualquer tecla para fechar o jogo.");
                 Console.ReadKey();
                 jogoRun = false;
             }
              break;
         case "2":
+            Console.ForegroundColor = ConsoleColor.DarkGray;
             Console.WriteLine("\nVoce entra na tenda perfumada do mercador...");
-            Console.ReadKey();
+            Thread.Sleep(1200);
+            Console.ResetColor();
             mercante.Interagir(meuJogador);
             break;
         case "3":
@@ -101,10 +139,10 @@ while (jogoRun)
             break;
         case "0":
             jogoRun = false;
-            Console.WriteLine("\nObrigado por jogar! Sua lenda sera lembrada.");
+            Console.WriteLine("\nObrigado por jogar Rise of the Warrior!");
             break;
         default:
-            Console.WriteLine("\nOpcao invalida! O gladiador esta confuso.");
+            Console.WriteLine("\nOpcao invalida! O guerreiro esta confuso.");
             Thread.Sleep(1500);
             break;
     }

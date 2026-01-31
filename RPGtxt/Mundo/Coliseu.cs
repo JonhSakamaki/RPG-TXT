@@ -40,75 +40,86 @@ public class Coliseu
 
     public void RealizarDuelo(Jogador jogador, Inimigo inimigo)
     {   
+        Console.ForegroundColor = ConsoleColor.DarkGray;
+        Console.WriteLine($"\n*** Os portoes se abrem... {inimigo.Nome} surge das sombras! ***");
+        Console.ResetColor();
+        Thread.Sleep(1000);
+
         while(jogador.VidaAtual > 0 && inimigo.VidaAtual > 0)
         {
-         Console.Clear();
-         Console.WriteLine("========================================");
-         Console.WriteLine($"   COMBATE: {jogador.Nome} vs {inimigo.Nome}");
-         Console.WriteLine("========================================");
-         Console.WriteLine($"{jogador.Nome} HP: {jogador.VidaAtual}/{jogador.VidaMaxima}");
-         Console.WriteLine($"{inimigo.Nome} HP: {inimigo.VidaAtual}/{inimigo.VidaMaxima}");
-         Console.WriteLine("========================================");   
+            Console.Clear();
+            Console.WriteLine("╔════════════════════════════════════════╗");
+            Console.Write("║  JOGADOR:");
+            Console.ForegroundColor = ConsoleColor.Cyan; Console.Write(jogador.Nome.PadRight(10)); Console.ResetColor();
+            Console.Write("vs  INIMIGO:");
+            Console.ForegroundColor = ConsoleColor.Red; Console.WriteLine(inimigo.Nome.PadRight(10) + "║"); Console.ResetColor();
+            Console.WriteLine($"║  HP: {jogador.VidaAtual}/{jogador.VidaMaxima}".PadRight(21) + $"| HP: {inimigo.VidaAtual}/{inimigo.VidaMaxima}".PadRight(20) + "║");
+            Console.WriteLine("╚════════════════════════════════════════╝");
 
-        Console.WriteLine("\nSua Vez! O que deseja fazer? ");
-        Console.WriteLine("1. Atacar com sua arma");
-        Console.Write("Escolha: ");
+            Console.WriteLine("\nSUA VEZ! [1]ATACAR");
+            Console.Write("Escolha: ");
+            string acao = Console.ReadLine() ?? "";
 
-        string acao = Console.ReadLine() ?? "";
-
-        if (acao == "1")
+            if (acao == "1")
             {
-                Console.WriteLine($"\n> Voce avanca para atacar!");
                 int danoPlayer = jogador.CalcularDano();
                 inimigo.ReceberDano(danoPlayer);
+                Console.Write("\n> Voce golpeia com precisao: ");
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine($"-{danoPlayer} HP no inimigo");
+                Console.ResetColor();
 
-                if (inimigo.VidaAtual <= 0) break;
+                if(inimigo.VidaAtual <= 0) break;
 
-                Console.WriteLine($"\n> {inimigo.Nome} contra-ataca!");
-            int danoInimigo = inimigo.CalcularDano();
-            jogador.ReceberDano(danoInimigo);
+                Thread.Sleep(500);
+                int danoInimigo = inimigo.CalcularDano();
+                jogador.ReceberDano(danoInimigo);
 
-            Console.WriteLine("\nPressione qualquer tecla para o proxino turno...");
-            Console.ReadKey();
+                Console.Write($"> {inimigo.Nome} revida ferozmente: ");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"-{danoInimigo} de sua Vida!");
+                Console.ResetColor();
+
+                Console.WriteLine("\nPressione qualquer tecla para continuar...");
+                Console.ReadKey();
             }
-        else
-        {
-            Console.WriteLine("\nOpcao invalida! voce hesitou e perdeu sua chance.");
-            Thread.Sleep(1000);
+            else
+            {
+                Console.ForegroundColor =            ConsoleColor.Yellow;
+                Console.WriteLine("\n[AVISO]: Opção inválida! O gladiador hesita no combate e perde sua chance...");
+                Console.ResetColor();
+                Thread.Sleep(1000); 
 
-            int danoInimigo = inimigo.CalcularDano();
-            jogador.ReceberDano(danoInimigo);
-            Console.ReadKey();
-        }
-            
+                int danoInimigo = inimigo.CalcularDano();
+                jogador.ReceberDano(danoInimigo);
+                Console.ReadKey();
+            }
         }
         
-       
         if (jogador.VidaAtual > 0)
         {
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine($"\n VITORIA! {inimigo.Nome} foi derrotado.");
+            Console.WriteLine($"\nVITORIA! O publico vai ao delirio com a queda do {inimigo.Nome}!");
             Console.ResetColor();
 
-            jogador.GanharExp(inimigo.XpRecompensa);         
-           
+            jogador.GanharExp(inimigo.XpRecompensa);
             int ouroGanho = inimigo.DropOuro();
             jogador.GanharOuro(ouroGanho);
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine($"Recompensa da partida: {ouroGanho}G recebidos!");
-            Console.ResetColor();
 
-            Console.WriteLine("\nPressione qualquer tecla para continuar...");
+            Console.Write("Recompensa: ");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine($"{ouroGanho}G coletados do chao da arena.");
+            Console.ResetColor();
             Console.ReadKey();
         }
         else
         {
             Console.ForegroundColor = ConsoleColor.DarkRed;
-            Console.WriteLine($"\n DERROTA... {jogador.Nome} caiu diante de {inimigo.Nome}.");
-            Console.WriteLine("A plateia silencia enquanto seu corpo e retirado da arena...");
+            Console.WriteLine($"\nDERROTA... {jogador.Nome} caiu. o Silencio toma conta do Coliseu.");
             Console.ResetColor();
             Console.ReadKey();
         }
+         
     }
 
     public void IniciarBatalha(Jogador jogador)
