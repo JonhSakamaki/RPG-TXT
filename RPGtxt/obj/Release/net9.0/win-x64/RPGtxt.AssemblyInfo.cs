@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("RiseOfTheWarrior")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f8281886ad9916bb41a3487d995f6380ea42ef1c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+280e4e67dbbc4ccfbde1e032dff45e3aafc133ad")]
 [assembly: System.Reflection.AssemblyProductAttribute("RiseOfTheWarrior")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RiseOfTheWarrior")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -30,17 +30,28 @@ public class Loja
 
     public void MostrarMenu()
     {
-        Console.WriteLine("\n========== BEM VINDO A LOJA DO COLISEU ==========");
-        Console.WriteLine("O que voce deseja comprar?");
+        Console.WriteLine("\n╔══════════════════════════════════════════════════════╗");
+        Console.WriteLine("║             VITRINE DO MERCADOR                      ║");
+        Console.WriteLine("╚══════════════════════════════════════════════════════╝");
 
         for (int i = 0; i < Estoque.Count; i++)
         {
-            Console.Write($"{i + 1}.");
-            Estoque[i].ExibirDescricao();
+
+            var item = Estoque[i];
+
+            if (item is Arma) Console.ForegroundColor = ConsoleColor.Cyan;
+            else if (item is Armadura) Console.ForegroundColor = ConsoleColor.Magenta;
+            else Console.ForegroundColor = ConsoleColor.Yellow;
+
+            Console.Write($"{i + 1}. {item.Nome.PadRight(25)}");
+
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine($"| Preco: {item.PrecoCompra}G");
+            Console.ResetColor();   
         }
 
         Console.WriteLine("0. Sair da Loja");
-        Console.WriteLine("=================================================");
+        Console.WriteLine("════════════════════════════════════════════════════════");
     }
 
     public void ComprarItem(int escolha, Jogador jogador)
@@ -50,6 +61,7 @@ public class Loja
         if (indice < 0 || indice >= Estoque.Count)
         {
             Console.WriteLine("Opcao invalida! Escolha um item que esta na vitrine.");
+            Thread.Sleep(1000);
             return;
         }
 
@@ -58,7 +70,7 @@ public class Loja
         if(jogador.Ouro >= itemDesejado.PrecoCompra)
         {
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine($"\n [LOJA] Voce Comprou: {itemDesejado.Nome} por {itemDesejado.PrecoCompra}G.");
+            Console.WriteLine($"\n [MERCADOR] Voce Comprou: {itemDesejado.Nome} por {itemDesejado.PrecoCompra}G.");
             Console.ResetColor();
             jogador.Pagar(itemDesejado.PrecoCompra);
             jogador.AddInventario(itemDesejado);
@@ -67,7 +79,7 @@ public class Loja
         else
         {
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine($"\n[Loja] Ouro insuficiente! Volte para o Coliseu e lute!");
+            Console.WriteLine($"\n[MERCADOR] Ouro insuficiente! Volte para o Coliseu e lute!");
             Console.ResetColor();
         }
         Console.WriteLine("Pressione uma tecla para continuar...");
@@ -79,18 +91,19 @@ public class Loja
     {
         if (indiceNoInventario < 0 || indiceNoInventario >= jogador.Inventario.Count)
         {
-            Console.WriteLine("Voce nao tem este item no seu inventario!");
+            Console.WriteLine("Voce nao tem este item!");
             return;
         }
-        Item itemParaVender = jogador.Inventario[indiceNoInventario];
 
+        Item itemParaVender = jogador.Inventario[indiceNoInventario];
         int valorVenda = itemParaVender.PrecoCompra / 2;
 
         jogador.GanharOuro(valorVenda);
-
         jogador.Inventario.RemoveAt(indiceNoInventario);
 
-        Console.WriteLine($"\n[LOJA] Voce vendeu {itemParaVender.Nome} por {valorVenda}G");
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.WriteLine($"\n[MERCADOR] Voce vendeu {itemParaVender.Nome} por {valorVenda}G");
+        Console.ResetColor();
     }
 
     public void Interagir(Jogador jogador)
@@ -100,12 +113,22 @@ public class Loja
         while (!saindo)
         {
             Console.Clear();
-            Console.WriteLine($"-_-_-_-_- LOJA DE EQUIPAMENTOS -_-_-_-_-");
-            Console.WriteLine($"Seu Ouro: {jogador.Ouro}G");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("╔══════════════════════════════════════════════╗");
+            Console.Write("║  MERCADO | CLIENTE: ");
+            Console.ForegroundColor = ConsoleColor.Cyan; Console.Write(jogador.Nome.ToUpper().PadRight(8));
+            Console.ForegroundColor = ConsoleColor.Yellow; Console.WriteLine("                        ║");
+            Console.Write("║  SEU OURO: ");
+            Console.ForegroundColor = ConsoleColor.Yellow; Console.Write($"{jogador.Ouro}G".PadRight(8));
+            Console.ForegroundColor = ConsoleColor.Yellow; Console.WriteLine("                                ║");
+            Console.WriteLine("╚══════════════════════════════════════════════╝");
+            Console.ResetColor();
+            
+
             Console.WriteLine("1. Ver Itens para Comprar");
             Console.WriteLine("2. Vender Meus Itens (50% do valor)");
             Console.WriteLine("0. Sair da Loja");
-            Console.Write("Escolha uma opcao: ");
+            Console.Write("\nEscolha uma opcao: ");
 
             string opcao = Console.ReadLine()!;
 
@@ -131,17 +154,17 @@ public class Loja
                     break;
                 case "0":
                     saindo = true;
-                    Console.WriteLine("Obrigado pela visita! Volte sempre.");
+                    Console.ForegroundColor = ConsoleColor.DarkGray;
+                    Console.WriteLine("\n[MERCADOR]: Boa sorte na arena, Guerreiro!");
+                    Console.ResetColor();
+                    Thread.Sleep(1000);
                     break;
 
                 default:
                     Console.WriteLine("Opcao invalida!");
                     Thread.Sleep(1000);
                     break;
-
             }
-
         }
     }
-
 }

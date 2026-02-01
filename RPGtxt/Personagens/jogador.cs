@@ -9,7 +9,7 @@ public class Jogador : PersonagemBase
         Nivel = 1;
         ExpAtual = 0;
         ExpNecessaria = 100;
-        Ouro = 100;
+        Ouro = 0;
     }
     public int Nivel {get; private set;}
     public int ExpAtual{get; private set;}

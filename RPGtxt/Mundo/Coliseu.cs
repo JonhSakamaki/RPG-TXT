@@ -9,9 +9,9 @@ public class Coliseu
 
     public Inimigo GerarInimigoParaOnda()
     {
-        string[] tipos = {"SLime", "Goblins", "Esqueletos", "Kobolds", "Orc", "treant"};
+        string[] tipos = {"Slime", "Goblin", "Esqueleto", "Kobold", "Orc", "treant, HobGoblin, Zumbi, Ogro, Trolls"};
         string tipoSorteado = tipos[new Random().Next(tipos.Length)];
-        string nome = $"{tipoSorteado} da Onda {OndaAtual}";
+        string nome = $"{tipoSorteado}[ONDA] {OndaAtual}";
         int vidaBase = 50;
         int atkMinBase = 8; 
         int atkMaxBase = 12;

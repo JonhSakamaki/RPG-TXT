@@ -54,7 +54,7 @@ while (jogoRun)
     Console.ForegroundColor = ConsoleColor.Red; Console.Write($"{meuJogador.VidaAtual}/{meuJogador.VidaMaxima}".PadRight(10));
     Console.ForegroundColor = ConsoleColor.Yellow; Console.Write(" | OURO: ");
     Console.ForegroundColor = ConsoleColor.Yellow; Console.Write($"{meuJogador.Ouro}G".PadRight(10));
-    Console.ForegroundColor = ConsoleColor.Yellow; Console.WriteLine("            ║");
+    Console.ForegroundColor = ConsoleColor.Yellow; Console.WriteLine("           ║");
 
     Console.Write("║  ARMA: ");
     Console.ForegroundColor = ConsoleColor.Cyan; 
