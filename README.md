@@ -65,6 +65,12 @@ Ao ser iniciado, o software segue a seguinte esteira de processamento:
 
 ---
 
+## 🎮 Download Direto
+Você pode baixar a versão pronta para jogar (sem precisar compilar o código) clicando aqui: 
+[Baixar Rise of the Warrior v1.0](https://github.com/JonhSakamaki/RPG-TXT/releases/tag/V1.0.0)
+
+---
+
 ## 🏗️ Estrutura do Projeto
 
 ```text
