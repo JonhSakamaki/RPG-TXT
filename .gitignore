@@ -1,0 +1,17 @@
+# Pastas de compilação (Arquivos temporários e binários)
+bin/
+obj/
+
+# Arquivos do Visual Studio e VS Code
+.vs/
+.vscode/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Arquivos de publicação
+publish/
+
+# Arquivos de log e cache
+*.log
