@@ -1,2 +1,0 @@
-D:\Jonh Arquivos\Meus Projetos\RPG TXT\RPGtxt\bin\Release\net9.0\win-x64\publish\RiseOfTheWarrior.pdb
-D:\Jonh Arquivos\Meus Projetos\RPG TXT\RPGtxt\bin\Release\net9.0\win-x64\publish\RiseOfTheWarrior.exe
